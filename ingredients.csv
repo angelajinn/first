@@ -1,0 +1,14 @@
+name,amount,type,recipe
+pasta,200g,starch,tomato_pasta
+tomato_sauce,14 ounces,sauce,tomato_pasta
+onion,0.5,vegetable,tomato_pasta
+beef,250g,meat,tomato_pasta
+rice_cake,350g,starch,tteokbokki
+fish_cake,150g,protein,tteokbokki
+soup_stock,2 cups,soup,tteokbokki
+gochujang,3 tbsp,sauce,tteokbokki
+onion,60g,vegetable,tteokbokki
+udon,500g,starch,yaki_udon
+cabbage,1 cup,vegetable,yaki_udon
+shrimp,200g,protein,yaki_udon
+mushroom,60g,vegetable,yaki_udon

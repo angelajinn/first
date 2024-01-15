@@ -7,7 +7,6 @@ CREATE TABLE recipe (
 	CONSTRAINT recipe_pkey PRIMARY KEY (recipe_name)
 );
 
--- when creating table name using singular
 CREATE TABLE ingredient (
 	-- surrogate ID: for more complex systems
 	id int GENERATED ALWAYS AS IDENTITY, -- IDENTITY: creates primary key constraint
@@ -17,9 +16,6 @@ CREATE TABLE ingredient (
 	recipe varchar(50),
     CONSTRAINT ingredient_recipe_fkey FOREIGN KEY (recipe) REFERENCES recipe (recipe_name)
 );
-
--- alter a table after the table is created 
--- alter table ingredients add CONSTRAINT ingredient_pkey PRIMARY KEY (ingredientid)
 
 INSERT INTO Recipe (recipe_name,description,serving_size,recipe_type,time) values ('tomato_pasta', 'italian', 4, 'lunch', 40);
 INSERT INTO Recipe (recipe_name,description,serving_size,recipe_type,time) values ('tteokbokki', 'korean', 2, 'dinner', 20);
@@ -40,15 +36,11 @@ INSERT INTO Ingredient (ingredient_name,amount,ingredient_type,recipe) values ('
 INSERT INTO Ingredient (ingredient_name,amount,ingredient_type,recipe) values ('shrimp', '200g', 'protein', 'yaki_udon');
 INSERT INTO Ingredient (ingredient_name,amount,ingredient_type,recipe) values ('mushroom', '60g', 'vegetable', 'yaki_udon');
 
-select * from ingredient
 
--- SELECT CLAUSE (what columns) 
 SELECT
   recipe.*,
   ingredient.*
--- FROM CLAUSE (from what table)
 FROM recipe
--- JOIN CLAUSE (to what table)
 FULL OUTER JOIN ingredient ON ingredient.recipe=Recipe.recipe_name;
 
 SELECT COUNT(*), recipe_type
@@ -60,17 +52,3 @@ SELECT ingredient.ingredient_type, COUNT(distinct recipe.recipe_name)
 FROM recipe 
 JOIN ingredient ON ingredient.recipe=Recipe.recipe_name
 GROUP BY ingredient_type; 
-
--- another method
-select ingredient_type, count(distinct recipe_name)
-from (
-    SELECT
-      recipe.*,
-      ingredient.*
-    -- FROM CLAUSE (from what table)
-    FROM recipe
-    -- JOIN CLAUSE (to what table)
-    JOIN ingredient ON ingredient.recipe=Recipe.recipe_name
-) AS JOINED_RESULT
-group by ingredient_type
-

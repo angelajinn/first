@@ -1,19 +1,22 @@
+-- create table for recipe items
 CREATE TABLE recipe (
 	recipe_name varchar(50),
 	description varchar(50),
 	serving_size int,
 	recipe_type varchar(50),
 	time int,
+	-- create primary key: ensures no two rows in the table have the same value (allows for NULL values)
 	CONSTRAINT recipe_pkey PRIMARY KEY (recipe_name)
 );
 
 CREATE TABLE ingredient (
 	-- surrogate ID: for more complex systems
-	id int GENERATED ALWAYS AS IDENTITY, -- IDENTITY: creates primary key constraint
+	id int GENERATED ALWAYS AS IDENTITY, -- IDENTITY: creates primary key constraint (number value)
 	ingredient_name varchar(50),
 	amount varchar(50),
 	ingredient_type varchar(50),
 	recipe varchar(50),
+	-- foreign key created to link two tables together; also acts as a constraint, ensuring the values in ingredient have a corresponding value in recipe (not unique)
     CONSTRAINT ingredient_recipe_fkey FOREIGN KEY (recipe) REFERENCES recipe (recipe_name)
 );
 
@@ -47,6 +50,7 @@ SELECT COUNT(*), recipe_type
 FROM recipe
 GROUP BY recipe_type;
 
+-- check how many recipes have the same ingredient type
 -- distinct: if a recipe has 2 vegetable ingredients the recipe will only be counted as 1
 SELECT ingredient.ingredient_type, COUNT(distinct recipe.recipe_name)
 FROM recipe 

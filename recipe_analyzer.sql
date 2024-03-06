@@ -5,7 +5,7 @@ CREATE TABLE recipe (
 	serving_size int,
 	recipe_type varchar(50),
 	time int,
-	-- create primary key: ensures no two rows in the table have the same value (allows for NULL values)
+	-- create primary key: ensures no two rows in the table have the same value (the column cannot be NULL for primary key)
 	CONSTRAINT recipe_pkey PRIMARY KEY (recipe_name)
 );
 

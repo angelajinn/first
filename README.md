@@ -1,4 +1,4 @@
-# 🥣 Whisk: Recipe Analyzer
+# 🥣 Whisk: Recipe Finder
 Welcome to Whisk! Whisk is an application that _whisks_ together recipes for you by analyzing recipe and ingredient data through modulizing different components into multiple Python packages. Database schemas are created to store recipe and ingredient data and inspect the relationship between data objects. SQL(PostGres) is used to analyze the data where foreign keys and other constraints are established to keep data integrity. 
 
 Different functions were implemented to analyze the data. These functions include: 
@@ -8,4 +8,3 @@ Different functions were implemented to analyze the data. These functions includ
 
 Next Steps:
 - Apply a large dataset of recipes into the program
-- Create an interface using Flask

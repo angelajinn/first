@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>Search Results</h1>
+        </div>
+
+        <h2>Recipes Found for: "{{ search_query }}"</h2>
+        {% if recipes %}
+            <ul>
+                {% for recipe in recipes %}
+                    <li>
+                        <h3>{{ recipe.name }}</h3>
+                        <p>{{ recipe.description }}</p>
+                        <p>Serving Size: {{ recipe.serving_size }}</p>
+                        <p>Meal Type: {{ recipe.type }}</p>
+                        <p>Ingredients:</p>
+                        <ul>
+                            {% for ingredient in recipe.ingredients %}
+                                <li>{{ ingredient.name }} - {{ ingredient.amount }} {{ ingredient.type }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No recipes found with the given ingredients.</p>
+        {% endif %}
+        
+        <a href="/" class="back-button">Go Back</a>
+    </div>
+</body>
+</html>

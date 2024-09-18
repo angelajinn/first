@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whisk Together Recipes</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            padding: 0 10%;
+        }
+        .left-section {
+            max-width: 40%;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            color: #00AEEF;
+        }
+        .logo img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        .title {
+            margin: 30px 0 10px;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .subtitle {
+            font-size: 2rem;
+            color: #FFB74D;
+        }
+        .input-section {
+            margin-top: 30px;
+        }
+        .input-section label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        input[type="text"] {
+            padding: 15px;
+            font-size: 1.2rem;
+            width: 300px;
+            border-radius: 50px;
+            border: none;
+            margin-right: 10px;
+            outline: none;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #fff;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #FFB74D;
+            color: #fff;
+        }
+        .right-section {
+            background-image: url('/static/chef.png'); /* Make sure to place the burger image in the static folder */
+            background-size: 512px 512px; /* Set width and height of the image */
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100%;
+            width: 50%;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <h1 class="title">WHISK Together Recipes</h1>
+            <p class="subtitle">Enter your ingredient(s):</p>
+            <p>Comma-separated</p>
+            <div class="input-section">
+                <form method="POST" action="/search">
+                    <div class="search-bar">
+                        <input type="text" id="ingredients" name="ingredients" placeholder="Search..." required>
+                        <button type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="right-section"></div>
+    </div>
+</body>
+</html>

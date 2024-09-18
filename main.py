@@ -3,14 +3,16 @@ import logging
 import sys
 from DataAccess.FileDataAccess import DatabaseReader
 from Analysis.analyzeFunction import recipeIngredients
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
+# Connect to the database and load the recipes
 dbData = DatabaseReader("postgres", "postgres", "purple7", "127.0.0.1", "5432")
 recipe_dict = dbData.readDBRecipe()
 print(dbData.readDBRecipe())
 
+# Render the home page
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -18,16 +20,20 @@ def home():
 @app.route('/search', methods=['POST'])
 def search():
     try:
-        ingredients = request.form.getlist('ingredients')  # Get ingredients 
+        # Get the ingredients from the form
+        ingredients = request.form['ingredients']  # Get comma-separated ingredients
         if not ingredients:
-            return jsonify({'error': 'Please provide at least one ingredient to search for recipes.'})
-        
+            return render_template('results.html', search_query=ingredients, recipes=[])
+
+        # Convert the ingredients string to a list
+        ingredient_list = [ingredient.strip() for ingredient in ingredients.split(',')]
+
         # Find recipes with the ingredients
-        recipes = recipeIngredients(ingredients, recipe_dict)
-        
+        recipes = recipeIngredients(ingredient_list, recipe_dict)
+
         if not recipes:
-            return jsonify({'message': 'No recipes found with the given ingredients.'})
-        
+            return render_template('results.html', search_query=ingredients, recipes=[])
+
         # Convert Recipe objects to a more user-friendly format for display
         recipe_list = []
         for r in recipes:
@@ -40,10 +46,11 @@ def search():
             }
             recipe_list.append(recipe_info)
 
-        return jsonify({'recipes': recipe_list})
+        # Render the results page with the list of recipes
+        return render_template('results.html', search_query=ingredients, recipes=recipe_list)
     
     except Exception as e:
-        return jsonify({'error': str(e)})
+        return render_template('results.html', search_query='', recipes=[], error=str(e))
 
 if __name__ == '__main__':
     app.run(debug=True)
